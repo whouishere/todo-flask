@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+        <title>To Do list</title>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <h1>ToDo</h1>
+            <br>
+            <h3> <!-- maybe send text color as a string depending on list status? -->
+                {% if list_status is not none %}
+                    {{ list_status }}
+                {% else %}
+                    You seem to not have added any item to your list. Start adding then!
+                {% endif %}
+            </h3>
+            <br><br>
+            
+            <ul class="list">
+                <form action="" method="post">
+                {% for item in list %}
+                    <div class="list item">
+                        <li> 
+                            {% if item.is_done %}
+                                <input type="checkbox" checked="checked" name="{{ list.index(item) }}">
+                            {% else %}
+                                <input type="checkbox" name="{{ list.index(item) }}">
+                            {% endif %}
+
+                            {{ item.text }}
+                        </li>
+                    </div>
+                    <br>
+                {% endfor %}
+                    <div class="list item">
+                        <li>
+                            <input type="checkbox">
+                            <input type="text" name="new_item">
+                            <input type="submit" value="+">
+                        </li>
+                    </div>
+                </form>
+            </ul>
+
+            <br>
+            <footer>
+                <span>&copy; </span>
+                made in <a href="https://flask.palletsprojects.com/en/2.2.x/">Flask</a> with <b style="color: red;">&#x2764;</b>
+            </footer>
+        </div>
+    </body>
+</html>
