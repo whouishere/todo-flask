@@ -1,4 +1,6 @@
-#wrapper {
+body {
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
 
@@ -23,7 +25,10 @@
 }
 
 footer {
-    background-color: grey;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: grey;
 }
 
 footer span {
