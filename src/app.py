@@ -9,21 +9,21 @@ https_only = False
 @app.route("/", methods=["GET", "POST"])
 def index():
     list_status = None
-    todo = None
+    data_list = data.default_user
+    todo = data_list.get_as_python_list()
 
-    if data.user1.get_as_python_list():
+    if todo:
         if request.method == 'POST':
-            for index in range(len(data.user1.get_as_python_list())):
-                is_checked = f'{index}' in request.form
+            for index in range(len(todo)):
+                checked = f'{index}' in request.form
 
-                if data.user1.list_items[int(index)].is_done is not is_checked:
-                    data.user1.list_items[int(index)].set_is_done(is_checked)
+                if todo[int(index)].is_done is not checked:
+                    todo[int(index)].set_is_done(checked)
 
             new = request.form.get('new_item', '', type=str)
             if new != '':
-                data.user1.add(Item(new))
+                data_list.add(Item(new))
 
-        todo = data.user1.get_as_python_list()
         done = 0
         not_done = 0
         for item in todo:
