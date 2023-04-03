@@ -13,17 +13,15 @@ def index():
 
     if data.user1.get_as_python_list():
         if request.method == 'POST':
-            for key, value in request.form.items():
-                if key == 'new_item' and value != '':
-                    data.user1.list_items.append(Item(value))
-                elif key == 'new_item' and value == '':
-                    pass
-                else:
-                    # i honestly don't know why flask doesn't return unchecked form boxes
-                    # and i certainly have no idea for the workaround for this
-                    if value is not data.user1.list_items[int(key)].is_done:
-                        data.user1.list_items[int(key)].set_is_done(value)
-                        print(f'{type(value)}: {value}')
+            for index in range(len(data.user1.get_as_python_list())):
+                is_checked = f'{index}' in request.form
+
+                if data.user1.list_items[int(index)].is_done is not is_checked:
+                    data.user1.list_items[int(index)].set_is_done(is_checked)
+
+            new = request.form.get('new_item', '', type=str)
+            if new != '':
+                data.user1.add(Item(new))
 
         todo = data.user1.get_as_python_list()
         done = 0

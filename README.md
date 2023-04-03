@@ -20,7 +20,7 @@ source venv/bin/activate
 
 Now install project dependencies.
 ```
-python install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 And finally run the `run.py` script!
