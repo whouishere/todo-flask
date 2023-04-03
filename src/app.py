@@ -34,7 +34,7 @@ def index():
         
         list_status = f'{done} tasks done, {not_done} tasks not yet done. {len(todo)} tasks in total'
 
-    return render_template('index.html', list_status=list_status, list=todo)
+    return render_template('index.html.j2', list_status=list_status, list=todo)
 
 if https_only:
     Talisman(app, content_security_policy=None)
